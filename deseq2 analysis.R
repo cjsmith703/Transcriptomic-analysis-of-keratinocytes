@@ -9,7 +9,6 @@ library(tidyverse)
 library(clinfun)
 library(GGally)
 library(factoextra)
-library(apeglm)
 library(ashr)
 
 #download clinical data from GEO
