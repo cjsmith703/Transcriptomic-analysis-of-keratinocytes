@@ -25,7 +25,6 @@ raw_counts <- read.csv("skin_feature_counts.csv")
 #add ensembl codes
 ens <- read.csv("ENS_codes.csv")
 
-
 #Rename rows & columns so that row names in clindata = colnames in raw_counts
 rownames(clindata) <- clindata$title
 
