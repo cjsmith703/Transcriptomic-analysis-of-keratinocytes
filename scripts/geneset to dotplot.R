@@ -5,10 +5,10 @@
 library(tidyverse)
 
 #load data
-control_vs_ko <- read.csv('skin_control_vs_ko_deseq2.csv')
-control_vs_oe <- read.csv('skin_control_vs_oe_deseq2.csv')
-ko_vs_oe <- read.csv('skin_ko_vs_oe_deseq2.csv')
-geneset <- read.csv('geneset.csv')
+control_vs_ko <- read.csv('data/skin_control_vs_ko_deseq2.csv')
+control_vs_oe <- read.csv('data/skin_control_vs_oe_deseq2.csv')
+ko_vs_oe <- read.csv('data/skin_ko_vs_oe_deseq2.csv')
+geneset <- read.csv('data/geneset.csv')
 
 #filter for geneset and combine comparisons
 geneset_control_vs_ko <- control_vs_ko %>%

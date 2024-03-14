@@ -7,10 +7,10 @@ library(matrixStats)
 library(gplots)
 
 #load data test
-control_vs_ko <- read.csv('skin_control_vs_ko_deseq2.csv')
-control_vs_oe <- read.csv('skin_control_vs_oe_deseq2.csv')
-geneset <- read.csv('geneset.csv')
-tpm <- read.csv('skin_TPM_gene_names.csv')
+control_vs_ko <- read.csv('data/skin_control_vs_ko_deseq2.csv')
+control_vs_oe <- read.csv('data/skin_control_vs_oe_deseq2.csv')
+geneset <- read.csv('data/geneset.csv')
+tpm <- read.csv('data/skin_TPM_gene_names.csv')
 
 sig_ko_vs_control <- filter(control_vs_ko, padj <0.05)
 sig_oe_vs_control <- filter(control_vs_oe, padj <0.05)

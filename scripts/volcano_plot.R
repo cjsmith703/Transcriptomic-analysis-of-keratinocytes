@@ -5,7 +5,7 @@
 library(tidyverse)
 
 #read deseq2 file
-deseq2 <- read.csv('ko_vs_oe_deseq2.csv')
+deseq2 <- read.csv('data/ko_vs_oe_deseq2.csv')
 
 #create volcano dataframe
 volcano <- deseq2 %>%

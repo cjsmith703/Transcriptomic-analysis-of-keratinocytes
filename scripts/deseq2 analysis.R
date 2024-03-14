@@ -20,9 +20,9 @@ clindata <- data[["GSE207499_series_matrix.txt.gz"]]@phenoData@data
 #Alternatively read csv of clinical data if not uploaded to GEO repository
 
 #read raw counts file
-raw_counts <- read.csv("skin_feature_counts.csv")
+raw_counts <- read.csv("data/skin_feature_counts.csv")
 #add ensembl codes
-ens <- read.csv("ENS_codes.csv")
+ens <- read.csv("data/ENS_codes.csv")
 
 #Rename rows & columns so that row names in clindata = colnames in raw_counts
 rownames(clindata) <- clindata$title

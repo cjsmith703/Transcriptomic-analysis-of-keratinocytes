@@ -7,11 +7,11 @@ library(matrixStats)
 library(gplots)
 
 #load data
-genelist <- read.csv('skin_TPM_gene_names.csv')
-ensembl_IDs <- read.csv('ENS_codes.csv')
-control_vs_ko <- read.csv('skin_control_vs_ko_deseq2.csv')
-control_vs_oe <- read.csv('skin_control_vs_oe_deseq2.csv')
-tpm <- read.csv('skin_filtered_tpm_10.csv')
+genelist <- read.csv('data/skin_TPM_gene_names.csv')
+ensembl_IDs <- read.csv('data/ENS_codes.csv')
+control_vs_ko <- read.csv('data/skin_control_vs_ko_deseq2.csv')
+control_vs_oe <- read.csv('data/skin_control_vs_oe_deseq2.csv')
+tpm <- read.csv('data/skin_filtered_tpm_10.csv')
 
 #makes genes rownames
 genelist2 <- genelist[, -1:-2]

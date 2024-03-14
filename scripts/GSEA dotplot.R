@@ -5,9 +5,9 @@
 library(tidyverse)
 
 #load data
-control_vs_ko <- read.csv("GSEA_control_vs_ko.csv")
-control_vs_oe <- read.csv("GSEA_control_vs_oe.csv")
-ko_vs_oe <- read.csv("GSEA_ko_vs_oe.csv")
+control_vs_ko <- read.csv("data/GSEA_control_vs_ko.csv")
+control_vs_oe <- read.csv("data/GSEA_control_vs_oe.csv")
+ko_vs_oe <- read.csv("data/GSEA_ko_vs_oe.csv")
 
 #filter, slice top 10 genesets and combine data
 top_control_vs_ko <- control_vs_ko %>%
