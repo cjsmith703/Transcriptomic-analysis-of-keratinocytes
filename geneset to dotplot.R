@@ -1,6 +1,7 @@
 #Geneset to dotplot
 #Author: Dr Chris J Smith
 
+#load packages
 library(tidyverse)
 
 #load data
