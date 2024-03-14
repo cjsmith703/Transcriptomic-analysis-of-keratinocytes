@@ -18,14 +18,14 @@ sig_oe_vs_control <- filter(control_vs_oe, padj <0.05)
 sig_geneset_ko <- inner_join(sig_ko_vs_control, geneset, by = "Gene")
 sig_geneset_oe <- inner_join(sig_oe_vs_control, geneset, by = "Gene")
 
-write.csv(sig_geneset_ko, 'geneset_c_vs_KO.csv ')
-write.csv(sig_geneset_oe, 'geneset_c_vs_OE.csv ')
+#write.csv(sig_geneset_ko, 'geneset_c_vs_KO.csv ')
+#write.csv(sig_geneset_oe, 'geneset_c_vs_OE.csv ')
 
 combined_geneset <- bind_rows(sig_geneset_ko, sig_geneset_oe)
 
 geneset_tpm <- semi_join(tpm, combined_geneset, by = "ENS")
 
-write.csv(geneset_tpm, 'geneset._TPM.csv ')
+#write.csv(geneset_tpm, 'geneset._TPM.csv ')
 
 #make variable 1 row names
 
