@@ -8,10 +8,10 @@
  */
 
 // Execution environment setup
-params.scratchDir = "/data/scratch/hmy407/rnaseq"
-params.outdir = "/data/scratch/hmy407/rnaseq/output"
-params.reference = "/data/WHRI-AdrenalGenetics/references_new/hisat2_index_human/homosapiens.GRCh38"
-params.gtf = "/data/WHRI-AdrenalGenetics/references_new/Homo_sapiens.GRCh38.101.gtf.gz"
+params.scratchDir = "/path/to/data/"
+params.outdir = "/path/to/data/output"
+params.reference = "/path/to/reference/data/hisat2_index_human/homosapiens.GRCh38"
+params.gtf = "/path/to/reference/data/Homo_sapiens.GRCh38.101.gtf.gz"
 
 // Primary input
 params.inputDir = "${params.scratchDir}/input"

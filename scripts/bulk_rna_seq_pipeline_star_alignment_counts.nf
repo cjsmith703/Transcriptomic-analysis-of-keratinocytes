@@ -7,15 +7,15 @@
  */
 
 // Execution environment setup
-params.scratchDir = "/data/scratch/hmy407/star_counts/"
-params.outdir = "/data/scratch/hmy407/star_counts/output"
-params.star = "/data/WHRI-AdrenalGenetics/references_new/star"
+params.scratchDir = "/path/to/data/star_counts/"
+params.outdir = "/path/to/data/output"
+params.star = "/path/to/reference/star/data"
 
 // Primary input
 params.inputDir = "${params.scratchDir}/input"
 
 // Accessory files
-params.gtf = "/data/WHRI-AdrenalGenetics/references_new/Homo_sapiens.GRCh38.101.gtf.gz"
+params.gtf = "/path/to/data/Homo_sapiens.GRCh38.101.gtf.gz"
 
 // Create channel from input files
 Channel
@@ -121,89 +121,6 @@ process star {
     """
 }
 
-// /*
-//  * Convert SAM to BAM
-//  */
-process SamToBam {
-    beforeScript "module load samtools"
-    
-    //input as tuple to keep sample name
-    input:
-        tuple val(sampleName),
-              path(aligned_sam)
-
-    output:
-        tuple val(sampleName),
-              path("${sampleName}.aligned.bam"),
-              path("${sampleName}.aligned.bai")
-     
-    //copy the output to the output directory
-    publishDir "${params.outdir}/bam", mode: 'copy'
-
-    script:
-    """
-    samtools view -Sb \
-    ${sampleName}Aligned.out.sam | \
-    samtools sort -o ${sampleName}.aligned.bam;
-    """
-}
-
-/*
- * Quality assess BAM files
- */
-
-process qualimap {
-    beforeScript "module load miniforge"        
-    
-    input:
-        tuple val(sampleName),
-              path(aligned_bam) 
-
-    output:
-        tuple val(sampleName),
-              path("${sampleName}/qualimapReport.html"),
-              path("${sampleName}/genome_results.txt"),
-              path("${sampleName}/raw_data_qualimapReport/*")
- 
-    //copy the output to the output directory
-    publishDir "${params.outdir}/qualimap", mode: 'copy'
-    
-    script:
-    """
-    mamba activate nextflow_rnaseq
-
-    qualimap bamqc \
-        -bam ${aligned_bam} \
-        -outdir ${sampleName} \
-        --java-mem-size=8G
-    """
-}
-
-/*
- * Read quantification
- */
-
-process featureCounts {
-    beforeScript "module load miniforge"        
-    
-    input:
-        tuple val(sampleName),
-              path(aligned_bam) 
-
-    output:
-        path("${sampleName}_counts.txt")
-
-    //copy the output to the output directory
-    publishDir "${params.outdir}/featureCounts", mode: 'copy'
-   
-    script:
-    """
-    mamba activate nextflow_rnaseq
-
-    featureCounts -p --countReadPairs -a ${params.gtf} -g gene_id -o ${sampleName}_counts.txt ${aligned_bam}
-    """
-}
-
 process mergecounts {
     beforeScript "module load miniforge"      
 
@@ -248,7 +165,7 @@ workflow {
 
   
     //Perform fastqc on the input fastq files
-    //fastqc(fastq_ch)
+    fastqc(fastq_ch)
 
     //Trim the fastq files
     TrimGalore(fastq_ch)
@@ -256,15 +173,6 @@ workflow {
     //Align the trimmed fastq files to the reference genome
     star(TrimGalore.out)
     
-    //Convert the SAM files to BAM
-    //SamToBam(star.out)
-
-    //Quality assess the BAM files
-    //qualimap(SamToBam.out)
-
-    //Read quantification
-    //featureCounts(SamToBam.out)
-
     //Merge the counts files
     mergecounts(star.out.collect())
     
